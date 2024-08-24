@@ -11,9 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.dev.ktor_example_app.api.RetrofitClient
-import com.dev.ktor_example_app.model.DeleteEmployeeRequests
 import com.dev.ktor_example_app.model.Employee
-import com.dev.ktor_example_app.model.EmployeeRequests
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -59,9 +57,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun deleteEmployee(id: String) {
 
-        val employee = DeleteEmployeeRequests(id)
+//        val employee = DeleteEmployeeRequests(id)
+
         val apiService = RetrofitClient.instance
-        apiService.deleteEmployeeForID(employee).enqueue(object : Callback<Void> {
+        apiService.deleteEmployeeForID(id).enqueue(object : Callback<Void> {
             override fun onResponse(call: Call<Void>, response: Response<Void>) {
                 if (response.isSuccessful) {
                     Toast.makeText(this@MainActivity, "Employee deleted successfully", Toast.LENGTH_SHORT).show()
@@ -98,9 +97,9 @@ class MainActivity : AppCompatActivity() {
 
     private fun getEmployeeDetails(id: String) {
 
-        val employeeRequests = EmployeeRequests(id)
+//        val employeeRequests = EmployeeRequests(id)
         val apiService = RetrofitClient.instance
-        apiService.getEmployeeForID(employeeRequests).enqueue(object : Callback<Employee> {
+        apiService.getEmployeeForID(id).enqueue(object : Callback<Employee> {
             override fun onResponse(call: Call<Employee>, response: Response<Employee>) {
                 if (response.isSuccessful) {
                     val employee = response.body()
